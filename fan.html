@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Document</title>
+  <style type="text/css">
+  	*{
+  		margin: 0;
+  		padding: 0;
+  		font-family: "Microsoft YaHei";
+  	}
+  		#head{
+  			padding-top: 20px;
+            color: #00007C;
+  			width: 100%;
+  			height: 150px;
+  			overflow: hidden;
+  		}
+  		#head>h1{
+  			text-align: center;
+  		}
+  		#bg{
+  			position:absolute; 
+  			width: 102%;
+  			height: 150%; 
+  			z-index:-1;
+  		}
+		.bd-box{
+			width: 100%;
+			height: 450px;
+			margin:0px auto;
+			/*display: flex;
+			display: -webkit-flex;
+			flex-wrap:wrap;*/
+			padding-top: 30px;
+			margin-left: 15px;
+		}
+		.bd-box li{
+			width: 122px;
+			height: 182px;
+			overflow:hidden;
+			list-style: none;
+			float: left;
+			margin:5px 5px; 
+			cursor: pointer;
+			position: relative;
+			
+		}
+		.bd-box li img{
+			width:120px;	
+			height:180px;			
+			position:absolute;
+			left:0px;
+			top:0px;
+			z-index:2;
+			overflow:hidden;
+			border: 1px solid #00007C;
+		}
+		.bd-box li>span{
+			width:0px;
+			position:absolute;	
+			left:0px;
+			z-index:1;
+			text-align:center;
+			line-height:180px;
+			font-size:80px;
+			font-weight: bold;
+			background: #fff;
+			color:#50B7CE;
+			/*background:url("images/fp3.jpg");*/
+			overflow:hidden;
+			display:none;
+			left:60px;
+			border: 1px solid #00007C;
+		}
+		.bd-box li span b{
+		}
+  </style>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  	<script type="text/javascript">
+		window.onload=function(){
+					
+			var array=new Array();
+			for (var i = 0;; i++) {
+				if (array.length<20) {
+					generateRandom(20);
+				}else{
+					break;
+				}
+			}
+			function generateRandom (count) {
+				var arr=['A1','A2','A3','A4','A5','B1','B2','B3','B4','B5','C1','C2','C3','C4','C5','D1','D2','D3','D4','D5'];
+				var rand=parseInt(Math.random()*count);
+				for (var i = 0; i < array.length; i++) {
+					if (array[i]==arr[rand]) {
+						return false;
+					}
+				}
+				array.push(arr[rand]);
+			}
+			var lis=$(".bd-box li");
+			var aSpan = lis.find('span');
+			var aImg = lis.find('img');
+				lis.each(function(index){
+					$(this).click(function(){						
+						aImg.eq(index).stop();
+						aSpan.eq(index).stop();
+						aSpan.eq(index).html(array[index]);						
+						aImg.eq(index).animate({
+							left:60,
+							width:0							
+						},80,'',function(){
+							$(this).hide();
+							aSpan.eq(index).show().animate({
+								width:120,
+								left:0								
+							},80)
+						})
+					});
+				});	
+		}
+		$('#bg').height($(window).height());
+    	$('#bg').width($(window).width());	
+	</script>
+ </head>
+ <body>
+ 		<!--<div id="bg">  
+			<img src="images/ltbg.jpg" width="100%" height="100%"  /> 
+		</div>-->
+		<div id="head">
+			<h1>点击翻牌</h1>
+		</div>
+		<ul class='bd-box'>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			<li><img src="images/pai.jpeg"/><span></span></li>
+			
+		</ul>
+ </body>
+</html>
